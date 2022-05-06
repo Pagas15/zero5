@@ -5,8 +5,11 @@ import logoMobile from '../assets/img/logoMobile.png';
 import Navbars from './elements/Navbars';
 
 function Header() {
+  const [scroll, setScroll] = useState(false);
+  const [activeMobi, setActiveMobi] = useState(false);
+
   const itemsNavBar = [
-    {name: "About Us", key : "key1"},
+    {name: "About Us", key : "about"},
     {name: "Why Us", key : "key2"},
     {name: "Solution", key : "key3"},
     {name: "Contact", key : "key4"},
@@ -15,32 +18,36 @@ function Header() {
 
   };
   
-  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > 80);
     });
   }, []);
+
+  const toggleMobiMenu = () => {
+    setActiveMobi(!activeMobi)
+  }
   
 	return (
-    <header className={"header" + (scroll ? ' header--top' : '')}>
-      <div className="header__top">
+    <header className={"header" + (scroll ? ' header--top' : '') + (activeMobi ? ' active' : '')}>
+      <div className="header__bg" onClick={toggleMobiMenu}></div>
+      <div className="header__top" onClick={toggleMobiMenu}>
         <Link to="/" className="logo">
           <img src={logoMobile} alt="ZERO5" />
         </Link>
-        <div className="header__btn">
+        <button className="header__btn" onClick={toggleMobiMenu}>
           <span />
           <span />
           <span />
           <span />
-        </div>
+        </button>
       </div>
       <div className="wrapper">
         <Link to="/" className="logo mobileNone">
           <img src={logo} alt="ZERO5" />
         </Link>
-        <Navbars itemsNavBar={itemsNavBar} login={login}/>
+        <Navbars itemsNavBar={itemsNavBar} login={login} onClick={toggleMobiMenu} />
       </div>
     </header>
 	)

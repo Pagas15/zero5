@@ -69,6 +69,7 @@
 			height: 2px;
 			background: $cDark;
 			transition: all .2s ease-in-out;
+			left: 0;
 			&:nth-child(1){
 				top: 0;
 			}
@@ -191,13 +192,26 @@
 	.header{
 		top: 0;
 		transition: all .2s ease-in-out;
+		background: transparent;
+		height: 67px;
+		&__bg{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.66);
+		}
 		&.active{
 			height: 100vh;
-		}
-		&:not(.active){
 			.navBar{
-				transform: translateX(-100vw);
+				transform: translateX(0);
 			}
+		}
+		.navBar{
+			transform: translateX(-100vw);
+			max-width: 368px;
+			left: 0;
 		}
 		.wrapper{
 			padding: 0;

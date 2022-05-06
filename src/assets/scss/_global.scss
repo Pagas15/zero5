@@ -2,6 +2,17 @@
 main{
 	width: 100%;
 	overflow: hidden;
+	@include sm_block{
+		padding-top: 67px;
+	}
+}
+
+.header{
+	& + .footer{
+		@include from($break_sm){
+			margin-top: 152px;
+		}
+	}
 }
 .wrapper{
 	@include wrapper();

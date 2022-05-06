@@ -5,7 +5,7 @@ import Navbars from './elements/Navbars';
 
 function Footer() {
   const itemsNavBar = [
-    {name: "About Us", key : "key1"},
+    {name: "About Us", key : "about"},
     {name: "Why Us", key : "key2"},
     {name: "Solution", key : "key3"},
     {name: "Contact", key : "key4"},
