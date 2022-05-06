@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, FreeMode, Thumbs } from "swiper";
+import { Autoplay, FreeMode, Thumbs, Mousewheel } from "swiper";
 import { useParallax  } from 'react-scroll-parallax';
 
 import { SwiperBtnPrev, SwiperBtnNext } from './SwiperNavigation';
@@ -21,7 +21,8 @@ const HomeCarts = () => {
 			<div className='homeCarts__wrapper wrapper'>
 				<Swiper 
 					className="homeCarts__slider"
-					modules={[Autoplay, Thumbs]}
+					mousewheel={true}
+					modules={[Autoplay, Thumbs, Mousewheel]}
 					thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null  }}
 					direction={"vertical"}
 					autoplay={{
