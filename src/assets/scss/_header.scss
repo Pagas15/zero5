@@ -17,11 +17,15 @@
 	background: $cWh;
 	border-top: 1px solid $cDark;
 	border-bottom: 1px solid $cDark;
-	position: fixed;
+	position: absolute;
 	left: 0;
 	right: 0;
 	top: 80px;
 	z-index: 1000;
+	&--top{
+		top: 0;
+		position: fixed;
+	}
 	@include sm_block{
 		border: 0;
 	}
@@ -33,6 +37,7 @@
 		.navBar{
 			margin-left: auto;
 		}
+		align-items: center;
 	}
 	&__top{
 		display: flex;
@@ -129,6 +134,7 @@
 		position: relative;
 		line-height: 1.1em;
 		padding: 8px 0;
+		color: $cDark;
 		&:after{
 			transition: all .16s ease-in-out;
 			content: '';
