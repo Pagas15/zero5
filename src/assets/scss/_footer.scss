@@ -1,0 +1,137 @@
+.footer{
+	// height: 100vh;
+	background: $cDark;
+	&__top{
+		padding-top: 145px;
+		padding-bottom: 42px;
+		@include row-flex();
+		@include sm_block{
+			padding-top: 55px;
+			padding-bottom: 28px;
+		}
+	}
+	&__left{
+		@include col();
+		@include size(6);
+		@include shift-left(1);
+		.footer__title{
+			width: 66.6666666%;
+			@include sm_block{
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		@include to(1600px){
+			@include size(8);
+		}
+		@include sm_block{
+			@include shift-left(0);
+		}
+	}
+	&__title{
+		@include margin-last-bottom(80px);
+		position: relative;
+		z-index: 1;
+		&::before{
+			content: '';
+			display: block;
+			z-index: -1;
+			position: absolute;
+			top: 50%;
+			left: 8px;
+			transform: translateY(-50%);
+			width: 115px;
+			height: 117px;
+			background: url('../img/elements/footerText.png') center/cover no-repeat;
+			@include sm_block{
+				left: -20px;
+			}
+		}
+		@include sm_block{
+			@include margin-last-bottom(52px);
+		}
+	}
+	&__image{
+		@include margin-last-bottom(36px);
+		img{
+			max-width: 100%;
+		}
+	}
+	&__form{
+		@include col();
+		@include size(5);
+		@include shift-left(2);
+		.inputBox{
+			@include margin-last-bottom(30px);
+			@include sm_block{
+				@include margin-last-bottom(28px);
+			}
+		}
+		@include to(1600px){
+			@include shift-left(0);
+			@include size(7);
+		}
+		@include sm_block{
+			@include size(6);
+			@include shift-left(0);
+			.btnWhite{
+				float: right;
+			}
+		}
+	}
+	&__bottom{
+		border-top: 1px solid $cWh;
+		padding-top: 30px;
+		padding-bottom: 60px;
+		@include row-flex();
+		align-items: flex-start;
+		.linksTxt{
+			@include col();
+			@include size(1);
+			@include shift-left(1);
+
+			@include sm_block{
+				@include size(2);
+				@include shift-left(0);
+				max-width: 92px;
+				&__item{
+					@include margin-last-right(25px)
+				}
+			}
+		}
+		.navBar{
+			@include col();
+			@include size(4);
+			margin-left: auto;
+			justify-content: space-between;
+			&__item{
+				margin-right: 0;
+			}
+			@include to(1600px){
+				@include size(4.5);
+			}
+			@include lg_block{
+				@include size(6);
+			}
+			@include md_block{
+				@include size(8);
+			}
+		}
+		.miniLinks{
+			@include col();
+			@include size(2);
+			@include shift-left(1);
+			@include to(1600px){
+				@include size(2.5);
+				@include shift-left(0);
+			}
+			@include lg_block{
+				@include size(4);
+			}
+			@include sm_block{
+				@include size(3);
+				margin-left: auto;
+			}
+		}
+	}
+}

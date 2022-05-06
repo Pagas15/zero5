@@ -1,0 +1,309 @@
+@use "sass:math";
+
+/* urls ================================================= */
+
+$url-font: '../fonts/';
+
+/* color ================================================= */
+
+$cWh: #ffffff;
+$cDark: #262626;
+$cGreen: #386344;
+$cLightGreen: #A0DCAA;
+$cOrange: #E18558;
+
+
+/* Container & Breackpoint ================================================= */
+
+$break_lg: 1200px;
+$break_md: 992px;
+$break_sm: 768px;
+$break_xs: 480px;
+
+$fieldsContainer: 30px;
+$fieldsContainer_md: 12px;
+
+$wrapper: 1980px;
+
+$columns: 16;
+$column_one: math.div(100%, $columns);
+$columns_sm: 6;
+
+$offset: 30px;
+$offset_one_side: math.div($offset, 2);
+
+$offset_sm: 10px;
+$offset_one_side_sm: math.div($offset_sm, 2);
+
+/* Fonts ================================================= */
+
+$font_main: 'Arial';
+$font_main_weight: 400;
+
+/* ========================== mixin ======================= */
+
+// Adding fonts
+
+@mixin font($f-name, $f-path, $f-weight: normal, $f-style: normal){
+	@font-face{
+		font-family: $f-name;
+		src: url('#{$url-font}#{$f-path}.eot');
+		src: url('#{$url-font}#{$f-path}.eot?#iefix') format('embedded-opentype'),
+		url('#{$url-font}#{$f-path}.woff') format('woff'),
+		url('#{$url-font}#{$f-path}.ttf') format('truetype');
+		font-weight: $f-weight;
+		font-style: $f-style;
+    font-display: swap;
+  }
+}
+
+// For text (size, height, width) font
+
+@mixin lq($num1, $num2, $fondW: 400) {
+	font-size: $num1;
+	line-height: #{math.div($num2, $num1)}em;
+	font-weight: $fondW;
+}
+
+/* wrapper ================================================= */
+
+@mixin wrapper-full(){
+  padding-left: $fieldsContainer;
+  padding-right: $fieldsContainer;
+
+  // @include md-block(){
+  //   padding-left: $fieldsContainer_md;
+  //   padding-right: $fieldsContainer_md;
+  // }
+  @include sm_block{
+    padding-left: $fieldsContainer_md;
+    padding-right: $fieldsContainer_md;
+  }
+}
+
+@mixin wrapper(){
+  max-width: $wrapper;
+	width: 100%;
+  margin: 0 auto;
+  @include wrapper-full();
+}
+
+/* margins ================================================= */
+
+@mixin margin-last($n){
+  margin-left: $n;
+  margin-right: $n;
+  &:first-child{
+    margin-left: 0;
+  }
+  &:last-child{
+    margin-right: 0;
+  }
+}
+@mixin margin-last-v($n){
+  margin-top: $n;
+  margin-bottom: $n;
+  &:first-child{
+    margin-top: 0;
+  }
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+@mixin margin-last-top($n){
+  margin-top: $n;
+  &:first-child{
+    margin-top: 0;
+  }
+}
+@mixin margin-last-bottom($n){
+  margin-bottom: $n;
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+@mixin margin-last-right($n){
+  margin-right: $n;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+@mixin margin-last-left($n){
+  margin-left: $n;
+  &:first-child{
+    margin-left: 0;
+  }
+}
+
+/* smart grid ================================================= */
+
+@mixin row-offsets(){
+  margin-left: ($offset_one_side * -1);
+  margin-right: ($offset_one_side * -1);
+}
+
+@mixin row-flex(){
+  display: flex;
+  flex-wrap: wrap;
+  // @include row-offsets();
+}
+
+@mixin col-offsets($type){
+  #{$type}-left: $offset_one_side;
+  #{$type}-right: $offset_one_side;
+  @include sm_block{
+    #{$type}-left: $offset_one_side_sm;
+    #{$type}-right: $offset_one_side_sm;
+  }
+}
+
+@mixin col() {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  @include col-offsets(margin)
+}
+
+@mixin size($n) {
+  $val: math.div(100%, $columns) * $n;
+  width: #{calc(#{$val} - #{$offset})};
+  @include sm_block{
+    $val: math.div(100%, $columns_sm) * $n;
+    width: #{calc(#{$val} - #{$offset_sm})};
+  }
+}
+
+
+@mixin shift($n){
+  $val: math.div(100%, $columns) * $n;
+  margin-left: #{calc(#{$val} + #{$offset_one_side})};
+  margin-right: #{calc(#{$val} + #{$offset_one_side})};
+  @include sm_block{
+    $val: math.div(100%, $columns_sm) * $n;
+    margin-left: #{calc(#{$val} + #{$offset_one_side_sm})};
+    margin-right: #{calc(#{$val} + #{$offset_one_side_sm})};
+  }
+}
+
+@mixin shift-left($n){
+  $val: math.div(100%, $columns) * $n;
+  margin-left: #{calc(#{$val} + #{$offset_one_side})};
+  @include sm_block{
+    $val: math.div(100%, $columns_sm) * $n;
+    margin-left: #{calc(#{$val} + #{$offset_one_side_sm})};
+  }
+}
+
+@mixin shift-right($n){
+  $val: math.div(100%, $columns) * $n;
+  margin-right: #{calc(#{$val} + #{$offset_one_side})};
+  @include sm_block{
+    $val: math.div(100%, $columns_sm) * $n;
+    margin-right: #{calc(#{$val} + #{$offset_one_side_sm})};
+  }
+}
+
+@mixin shift-padding($n){
+  $val: math.div(100%, $columns) * $n;
+  padding-left: #{calc(#{$val} + #{$offset_one_side})};
+  padding-right: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-padding-left($n){
+  $val: math.div(100%, $columns) * $n;
+  padding-left: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+@mixin shift-padding-right($n){
+  $val: math.div(100%, $columns) * $n;
+  padding-right: #{calc(#{$val} + #{$offset_one_side})};
+}
+
+
+@mixin debug($background, $outline){
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  
+  > div{
+    height: inherit;
+    @include wrapper();
+    
+    > div{
+      height: inherit;
+      @include row-flex();
+      
+      > div{
+        @include col();
+        @include size(1);
+        height: inherit;
+        outline: $outline;
+        background: $background;
+      }
+    }
+  }
+}
+
+@mixin clearfix(){
+  &::after{
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+/* addaptive ================================================= */
+
+@mixin lg-block(){
+  @media screen and (max-width: $break_lg){
+    @content;
+  }
+}
+
+@mixin md-block(){
+  @media screen and (max-width: $break_md){
+    @content;
+  }
+}
+
+@mixin sm-block(){
+  @media screen and (max-width: $break_sm){
+    @content;
+  }
+}
+
+@mixin xs-block(){
+  @media screen and (max-width: $break_xs){
+    @content;
+  }
+}
+
+@mixin from($min_width){
+  @media screen and (min-width: $min_width){
+    @content;
+  }
+}
+
+@mixin to($max_width){
+  @media screen and (max-width: $max_width){
+    @content;
+  }
+}
+
+@mixin from-to($min_width, $max_width){
+  @media screen and (min-width: $min_width) and (max-width: $max_width){
+    @content;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
