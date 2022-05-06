@@ -220,29 +220,34 @@ main{
 			color: $cWh;
 		}
 		.background{
-			&:before, &:after{
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			
+			z-index: -1;
+			&:after, &:before{
+				transform: translateX(-292px);
+				content: '';
 				transition: all .05s ease-in-out;
-				
 			}
 			&:before{
-				content: '';
 				position: absolute;
 				top: 1px;
 				left: 1px;
 				bottom: 1px;
 				right: 27px;
-				background: $cDark;
-				z-index: -1;
+				background: $cWh;
 			}
 			&:after{
-				content: '';
 				position: absolute;
 				width: 0px;
 				right: 1px;
 				top: -1px;
 				bottom: 1px;
-				z-index: -1;
-				border-bottom: 56px solid $cDark; 
+				border-bottom: 56px solid $cWh; 
 				border-right: 26px solid transparent;	
 			}
 		}
@@ -282,11 +287,8 @@ main{
 				color: $cDark;
 			}
 			.background{
-				&:before{
-					background: $cWh;
-				}
-				&:after{
-					border-bottom-color: $cWh;
+				&:after, &:before{
+					transform: translateX(0);
 				}
 			}
 			.arrow{
