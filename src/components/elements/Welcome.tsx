@@ -12,12 +12,14 @@ const Welcome = () => {
   const [width, setWidth] = useState(false);
   
   useEffect(() => {
+		setWidth(!!(window.innerWidth > 768))
+
     window.addEventListener("resize", () => {
-      setWidth(!!(window.innerWidth < 768))
+      setWidth(!!(window.innerWidth > 768))
     });
   }, []);
 
-	const {ref: infoBlock} = useParallax<HTMLDivElement>(width ? {speed: 200} : {speed: 0});
+	const {ref: infoBlock} = useParallax<HTMLDivElement>(width ? {speed: 20, translateY: [-50, 50]} : {speed: 0, translateY: [0, 0]});
 	
 	return (
 	<section className="welcome">
