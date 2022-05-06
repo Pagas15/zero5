@@ -2,6 +2,7 @@ import React from 'react'
 
 import image from '../assets/img/elements/footer.png';
 import Navbars from './elements/Navbars';
+import { useParallax  } from 'react-scroll-parallax';
 
 function Footer() {
   const itemsNavBar = [
@@ -12,18 +13,24 @@ function Footer() {
   ]
 
 
+  const {ref: imageParalax} = useParallax<HTMLDivElement>({speed: 10, translateX: [-100, 100]});
+  const {ref: formParalax} = useParallax<HTMLDivElement>({speed: 10, translateX: [100, -100]});
+  const {ref: titleParalax} = useParallax<HTMLDivElement>({speed: -10});
+  
+
+
 	return (<footer className="footer">
     <div className="footer__top wrapper">
       <div className="footer__left">
-        <div className="footer__title txt28x34 cWhite">
+        <div className="footer__title txt28x34 cWhite" ref={titleParalax}>
           Say hello, <a href="./" className="cLightGreen">get more info</a> or schedule a demo
           </div>
-        <div className="footer__image mobileNone">
+        <div className="footer__image mobileNone" ref={imageParalax}>
           <img src={image} alt="" />
         </div>
         <a href="mailto:team@zero5.co" className="cWhite txt18x26 mobileNone">team@zero5.co</a>
       </div>
-      <div className="footer__form">
+      <div className="footer__form" ref={formParalax}>
         <form>
           <label className="inputBox">
             <input type="text" name="name" placeholder="Name" />

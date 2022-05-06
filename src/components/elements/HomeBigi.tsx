@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
 import { useParallax  } from 'react-scroll-parallax';
 
 import { SwiperBtnPrev, SwiperBtnNext } from './SwiperNavigation';
@@ -17,6 +18,11 @@ const HomeBigi = () => {
         direction={"vertical"}
         navigation={true}
         className="homeBigi__wrapper wrapper homeBigi__slider desctopNone"
+				autoplay={{
+					delay: 2500,
+					disableOnInteraction: false,
+				}}
+				modules={[Autoplay]}
       >
 				<SwiperSlide className='homeBigi__slide'>
 					<div className='homeBigi__info'>

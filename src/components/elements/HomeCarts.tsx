@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { FreeMode, Thumbs } from "swiper";
+import { Autoplay, FreeMode, Thumbs } from "swiper";
+import { useParallax  } from 'react-scroll-parallax';
 
 import { SwiperBtnPrev, SwiperBtnNext } from './SwiperNavigation';
 
 
 const HomeCarts = () => {
 	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
+  const {ref: navbar} = useParallax<HTMLDivElement>({speed: 10, translateX: [-50, 50], translateY: [0, 0]});
 
 	const anwdiaw = () => {
 		console.log(thumbsSwiper && thumbsSwiper.activeIndex);
@@ -18,9 +21,13 @@ const HomeCarts = () => {
 			<div className='homeCarts__wrapper wrapper'>
 				<Swiper 
 					className="homeCarts__slider"
-					modules={[Thumbs]}
+					modules={[Autoplay, Thumbs]}
 					thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null  }}
 					direction={"vertical"}
+					autoplay={{
+						delay: 3000,
+						disableOnInteraction: false,
+					}}
 				>
 					<SwiperSlide className='homeCarts__slide'>
 						<div className="homeCarts__image">
@@ -66,29 +73,31 @@ const HomeCarts = () => {
 					</div>
 				</Swiper>
 				<div className="navigation">
-					<Swiper
-						onSwiper={setThumbsSwiper}
-						spaceBetween={0}
-						slidesPerView={3}
-						freeMode={true}
-						watchSlidesProgress={true}
-						modules={[FreeMode, Thumbs]}
-						direction={"vertical"}
-						className='navigation__list'
-					>
-						<SwiperSlide className='navigation__item'>
-							<button className="navigation__nav" onClick={anwdiaw}>Upgrade</button>
-						</SwiperSlide>
-						<SwiperSlide className='navigation__item'>
-							<button className='navigation__nav' onClick={anwdiaw}>Manage</button>
-						</SwiperSlide>
-						<SwiperSlide className='navigation__item'>
-							<button className='navigation__nav' onClick={anwdiaw}>Customize</button>
-						</SwiperSlide>
-						<SwiperSlide className='navigation__item'>
-							<button className='navigation__nav' onClick={anwdiaw}>Create</button>
-						</SwiperSlide>
-					</Swiper>
+					<div ref={navbar}>
+						<Swiper
+							onSwiper={setThumbsSwiper}
+							spaceBetween={0}
+							slidesPerView={3}
+							freeMode={true}
+							watchSlidesProgress={true}
+							modules={[FreeMode, Thumbs]}
+							direction={"vertical"}
+							className='navigation__list'
+						>
+							<SwiperSlide className='navigation__item'>
+								<button className="navigation__nav" onClick={anwdiaw}>Upgrade</button>
+							</SwiperSlide>
+							<SwiperSlide className='navigation__item'>
+								<button className='navigation__nav' onClick={anwdiaw}>Manage</button>
+							</SwiperSlide>
+							<SwiperSlide className='navigation__item'>
+								<button className='navigation__nav' onClick={anwdiaw}>Customize</button>
+							</SwiperSlide>
+							<SwiperSlide className='navigation__item'>
+								<button className='navigation__nav' onClick={anwdiaw}>Create</button>
+							</SwiperSlide>
+						</Swiper>
+					</div>
 				</div>
 			</div>
     </section>
