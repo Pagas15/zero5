@@ -6,11 +6,13 @@ import HomeCarts from '../components/elements/HomeCarts';
 import Welcome from '../components/elements/Welcome';
 
 function Home() {
-	return (<>
+	return (
+    <>
     <Welcome />
     <HomeCarts />
     <HomeBigi />
-	</>)
+	</>
+    )
 }
 
 export default Home

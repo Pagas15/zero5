@@ -11,7 +11,8 @@ import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 
 function App() {
-  return (<>
+  return (
+  <>
     <Header />
     <Routes >
       <Route path="/" element={<Home />} />
